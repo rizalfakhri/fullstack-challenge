@@ -66,8 +66,6 @@ class CacheWeatherDataResult implements ShouldQueue
      */
     public function handle(): void
     {
-        \Log::info('started caching');
-
         $cachedData = Cache::get($this->cacheKey);
 
         if($cachedData) {
@@ -118,6 +116,6 @@ class CacheWeatherDataResult implements ShouldQueue
         }
 
         $cachedData['cached_hash'][$this->coordinate->getHash()] = $this->resultToCache;
-        Cache::put($this->cacheKey, json_encode($cachedData), now()->addMinutes(($remainingTtl < $this->ttl) ? ($this->ttl - $remainingTtl) : $remainingTtl));
+        Cache::put($this->cacheKey, json_encode($cachedData), now()->addMinutes($remainingTtl));
     }
 }
