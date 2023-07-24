@@ -10,7 +10,7 @@ export default {
 
   methods: {
     async fetchData() {
-      const url = "http://localhost:8080";
+      const url = "http://localhost";
       let response = await (await fetch(url)).json();
 
       this.apiResponse = response.data.map((weatherReport) => {
@@ -295,7 +295,7 @@ export default {
                     <tr
                       v-for="(forecast, index) in data.weather_report.forecast"
                       v-bind:key="index"
-                      class="border-b  border-secondary bg-secondary"
+                      class="border-b border-secondary bg-secondary"
                     >
                       <td
                         scope="row"
